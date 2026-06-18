@@ -10,11 +10,12 @@ const Part = (props) => {
 
 const Content = (props) => {
 
+
     return (
         <div>
-            <Part name={[props.exercises[0], props.parts[0]]} />
-            <Part name={[props.exercises[1], props.parts[1]]} />
-            <Part name={[props.exercises[2], props.parts[2]]} />
+            <Part name={[props.parts[0].name, props.parts[0].exercises]} />
+            <Part name={[props.parts[1].name, props.parts[1].exercises]} />
+            <Part name={[props.parts[2].name, props.parts[2].exercises]} />
         </div>
 
     )
