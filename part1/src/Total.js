@@ -1,12 +1,11 @@
 const Total = (props) => {
-    console.log(props)
-    let total = 0
-    for (const part of props.parts) {
-        total += part.exercises
 
-    }
 
-    return total
+    const total = props.parts.reduce((acc, act) => {
+        return acc + act.exercises
+    }, 0)
+
+    return <b>total of  {total}  exercices</b>
 }
 
 export default Total

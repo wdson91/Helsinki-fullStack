@@ -1,6 +1,6 @@
-const Header = (props) => {
+const Header = ({ course }) => {
 
-    return <h1>{props.prop || 'Desenvolvimento de aplicação Half Stack'}</h1>
+    return <h2>{course || 'Desenvolvimento de aplicação Half Stack'}</h2>
 
 }
 
