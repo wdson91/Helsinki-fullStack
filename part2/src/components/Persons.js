@@ -1,12 +1,20 @@
 
 import Note from "./Note"
 
-const Persons = ({names}) =>{
+const Persons = ({persons,deletePerson}) =>{
 
     return (
     <div >
-    {names.map(person => <Note key={person.id} id={person.id} name={person.name}
-    number={person.number}  />)}
+    {persons.map(person => (
+    <p key={person.id}>
+    
+    [{person.id}] - {person.name} — {person.number} 
+    <button onClick={() => {if (window.confirm(`Delete ${person.name} ?`)){
+                                    deletePerson(person.id)
+    }}}> Delete </button>
+  </p>
+
+    ))}
     </div>
     )
 }
