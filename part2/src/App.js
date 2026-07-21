@@ -39,9 +39,14 @@ const App = () => {
   }
 
   const updatePerson = (id,person) =>{
+      console.log(id,person)
+
     personService.update(id, person).then(
+      
       response => {
-        setPersons(persons.map(p => p.id !== id ? p : response.data))
+
+        setPersons(persons.map(p => p.id !== id ? p : response))
+        
       }
     )
     return 
