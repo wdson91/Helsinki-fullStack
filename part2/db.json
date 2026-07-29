@@ -1,29 +1,9 @@
 {
   "persons": [
     {
-      "name": "Ada Lovelace",
-      "number": "11",
-      "id": "2"
-    },
-    {
-      "name": "Dan Abramov",
-      "number": "12-43-234345",
-      "id": "3"
-    },
-    {
-      "name": "Mary Poppendieck",
-      "number": "39-23-6423122",
-      "id": "4"
-    },
-    {
       "name": "dasdsa",
       "number": "dasdas",
       "id": "H0zjRrxsIqs"
-    },
-    {
-      "name": "dasd",
-      "number": "asdad",
-      "id": "BG3PkaUFg2A"
     },
     {
       "name": "",
@@ -36,9 +16,19 @@
       "id": "7OjSsDMShKE"
     },
     {
-      "name": "Ada Lovelace ",
-      "number": "1",
-      "id": "CHZJxrUqVCY"
+      "name": "asdasdas",
+      "number": "dasda",
+      "id": "OBdf5gs4740"
+    },
+    {
+      "id": "D8s45g0Sje0",
+      "name": "eqwe",
+      "number": "qweqw"
+    },
+    {
+      "name": "qweqwe",
+      "number": "qweqwe",
+      "id": "lJomT9AuNBM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

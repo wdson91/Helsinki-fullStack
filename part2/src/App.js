@@ -3,13 +3,14 @@ import Filter from './components/Filter'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
 import personService from './services/PersonService'
-
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newName   , setNewName]   = useState('')
   const [newNumber , setNewNumber] = useState('')
   const [newFilter , setNewFilter] = useState('')
+  const [notification, setNotification] = useState(null)
   
   const getAll = () => {
     personService
@@ -49,6 +50,7 @@ const App = () => {
         
       }
     )
+
     return 
 
   }
@@ -57,6 +59,7 @@ const App = () => {
     event.preventDefault(event.target.value)
     
     const person = {
+      
       name: newName,
       number: newNumber,
     }
@@ -75,9 +78,18 @@ const App = () => {
     personService
       .create (person)
       .then(response => {
-        setPersons(persons.concat(response.data))
-      
-      })
+        setPersons(persons.concat(response))
+        setNotification({
+          message: `'${person.name}' updated!`,
+          style: 'success', // Você precisaria criar a classe .success no CSS
+          id: Date.now() // (Veja a explicação abaixo sobre esse ID)
+        })
+      }).catch(error => {
+        setNotification({
+          message: `Note '${person.name}' was already removed from server`,
+          style: 'error',
+          id: Date.now() 
+        })})
 
     clearInputs()
     
@@ -92,19 +104,31 @@ const App = () => {
   }
 
 
-  const deletePerson = (id) =>{
+  const deletePerson = (id,name) =>{
     
     personService.deletePerson(id).then(response => {
       setPersons(persons.filter(person => person.id !== id))
-      alert(`Person ${id} deleted `)
-    })
+      setNotification({
+          message: `'${name}' Removed`,
+          style: 'error', // Você precisaria criar a classe .success no CSS
+          id: Date.now() // (Veja a explicação abaixo sobre esse ID)
+        })
+    }).catch(error => {
+        
+      setNotification({
+          message: `Information of '${name}' has already been removed from server`,
+          style: 'error', // Você precisaria criar a classe .success no CSS
+          id: Date.now() // (Veja a explicação abaixo sobre esse ID)
+        })
+      
+      })
   }
   const names = newFilter === "" ? persons : persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
   
   return (
     <div>
       <h2>Phonebook</h2>
-
+      <Notification info={notification} />
       <Filter value={newFilter} functionToChange={handleFilterChange} />
 
       
