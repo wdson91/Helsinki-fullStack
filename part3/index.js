@@ -1,10 +1,14 @@
 const express = require('express')
+const cors = require('cors')
 const morgan = require('morgan')
 const fs = require('fs')
 const path = require("path")
 
 const app = express()
+
+app.use(cors())
 app.use(express.json())
+app.use(express.static('build'))
 
 let persons = 
  [
@@ -47,17 +51,9 @@ app.use(morgan(function (tokens, req, res) {
   ].join(' ')
 }))
 
-app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
-})
-
 app.get("/info",(request,response)=>{
-    
-   
-
     response.send(`<p>Phonebook has info for ${persons.length} people </p> \n
        ${new Date().toString()}`)
-
 })
 
 app.get('/api/persons', (request, response) => {
@@ -70,7 +66,6 @@ app.get('/api/persons/:id', (request, response) => {
   const person = persons.find(person => person.id === id)
 
   if(person){
-
       response.json(person)
   }else{
     response.status(404).end()
@@ -102,23 +97,23 @@ app.post('/api/persons', (request, response) => {
     })
     }
 
-    const newPerson = {
-        id:Math.random() *100,
-        name:name,
-        number:number
-    }
-
      const personExists = persons.some(person => person.name === name)
    
      if (personExists) {
-    return response.status(401).json({
-      error: 'This Name is already in use'
+    return response.status(400).json({
+      error: 'name must be unique'
     })
   }
 
+    const newPerson = {
+        id: Math.floor(Math.random() * 1000000),
+        name: name,
+        number: number
+    }
+
     persons.push(newPerson)
     
-    return response.status(204).end()
+    return response.status(201).json(newPerson)
 })
 
 const unknownEndpoint = (request, response) => {
@@ -127,7 +122,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

@@ -4,12 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
-
+.env
 # testing
 /coverage
 
-# production
-/build
+# production (mantido fora do gitignore para deploy fullstack no Render - ex 3.11)
+# /build
 
 # misc
 .DS_Store
