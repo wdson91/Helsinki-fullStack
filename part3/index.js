@@ -2,8 +2,6 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
-const fs = require('fs')
-const path = require('path')
 const Person = require('./models/person')
 
 const app = express()
@@ -16,7 +14,6 @@ morgan.token('body', (req) => {
   return JSON.stringify(req.body)
 })
 
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 app.use(morgan(function (tokens, req, res) {
   return [
     tokens.method(req, res),
